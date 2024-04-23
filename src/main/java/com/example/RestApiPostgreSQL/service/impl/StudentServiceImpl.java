@@ -4,6 +4,7 @@ import com.example.RestApiPostgreSQL.model.Student;
 import com.example.RestApiPostgreSQL.repository.StudentRepository;
 import com.example.RestApiPostgreSQL.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudents() {
-        return studentRepository.findAll();
+        return studentRepository.findAll(Sort.by(Sort.Direction.ASC, "Id"));
     }
 
     @Override
