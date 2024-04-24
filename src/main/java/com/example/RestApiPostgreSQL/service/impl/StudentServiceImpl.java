@@ -1,5 +1,7 @@
 package com.example.RestApiPostgreSQL.service.impl;
 
+import com.example.RestApiPostgreSQL.exception.StudentExceptionHandler;
+import com.example.RestApiPostgreSQL.exception.StudentNotFoundException;
 import com.example.RestApiPostgreSQL.model.Student;
 import com.example.RestApiPostgreSQL.repository.StudentRepository;
 import com.example.RestApiPostgreSQL.service.StudentService;
@@ -16,6 +18,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudent(Integer studentId) {
+        if (studentRepository.findById(studentId).isEmpty())
+            throw new StudentNotFoundException("Request Student does not Exist");
         return studentRepository.findById(studentId).get();
     }
 
